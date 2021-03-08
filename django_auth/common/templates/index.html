@@ -1,0 +1,15 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+ <meta charset="UTF-8">  
+ <title>Главная страница</title>  
+</head>  
+<body>  
+{% if username %}  
+    <h1>Привет, {{ username }}!</h1>  
+	<p>Тут ты можешь <a href="logout">выйти</a>.</p>  
+{% else %}  
+    <p>Тебе нужно <a href="login">войти</a> на сайт!</p>  
+{% endif %}  
+</body>  
+</html>
