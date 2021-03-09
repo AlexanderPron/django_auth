@@ -26,7 +26,7 @@ class CreateUserProfile(FormView):
   
     form_class = ProfileCreationForm
     template_name = 'profile-create.html'
-	success_url = reverse_lazy('common:index')
+    success_url = reverse_lazy('common:login')
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_anonymous:
             return HttpResponseRedirect(reverse_lazy('common:login'))
@@ -42,7 +42,11 @@ class CreateUserProfile(FormView):
 def index(request):  
     context = {}
     if request.user.is_authenticated:
+        curr_user = UserProfile.objects.get(user=request.user)
         context['username'] = request.user.username
-        context['age'] = UserProfile.objects.get(user=request.user).age
+        if curr_user.age:
+            context['age'] = curr_user.age
+        else:
+            context['age'] = 0
     return render(request, 'index.html', context)
     

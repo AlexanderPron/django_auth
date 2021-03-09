@@ -6,10 +6,10 @@
 </head>  
 <body>  
 {% if username %}  
-    <h1>Привет, {{ username }}!</h1>  
+    <h1>Привет, {{ username }}! Я знаю, что тебе {{ age }} лет!</h1> 
 	<p>Тут ты можешь <a href="logout">выйти</a>.</p>  
 {% else %}  
-    <p>Тебе нужно <a href="login">войти</a> на сайт!</p>  
+    <p>Тебе нужно <a href="register/">зарегистрироваться</a> или <a href="login">войти на сайт</a>!</p>  
 {% endif %}  
 </body>  
 </html>
