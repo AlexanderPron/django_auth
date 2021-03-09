@@ -24,14 +24,13 @@ class RegisterView(FormView):
   
 class CreateUserProfile(FormView):
   
-    form_class = ProfileCreationForm
+    # form_class = ProfileCreationForm
     template_name = 'profile-create.html'
     success_url = reverse_lazy('common:login')
     def dispatch(self, request, *args, **kwargs):
         if self.request.user.is_anonymous:
             return HttpResponseRedirect(reverse_lazy('common:login'))
         return super(CreateUserProfile, self).dispatch(request, *args, **kwargs)
-  
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.user = self.request.user
