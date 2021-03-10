@@ -8,7 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from common.forms import ProfileCreationForm
 from django.http.response import HttpResponseRedirect
-from common.models import UserProfile
+# from common.models import UserProfile
+from allauth.socialaccount.models import SocialAccount
 
 class RegisterView(FormView):
   
@@ -41,11 +42,8 @@ class CreateUserProfile(FormView):
 def index(request):  
     context = {}
     if request.user.is_authenticated:
-        curr_user = UserProfile.objects.get(user=request.user)
+        # curr_user = UserProfile.objects.get(user=request.user)
         context['username'] = request.user.username
-        if curr_user.age:
-            context['age'] = curr_user.age
-        else:
-            context['age'] = 0
+        context['github_url'] = SocialAccount.objects.get(provider='github', user=request.user).extra_data['html_url']
     return render(request, 'index.html', context)
     

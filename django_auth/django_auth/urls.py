@@ -20,4 +20,5 @@ from django.contrib.auth.views import LoginView
 urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', include('common.urls', namespace='common')),  
+    path('accounts/', include('allauth.urls')),
 ]
